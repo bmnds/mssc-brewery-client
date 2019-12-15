@@ -9,33 +9,16 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import guru.springframework.msscbreweryclient.web.model.BeerDto;
 import guru.springframework.msscbreweryclient.web.model.Customer;
 import lombok.extern.log4j.Log4j2;
 
 @SpringBootTest
 @Log4j2
-class BreweryClientTest {
+class BreweryCustomerClientTest {
 
 	@Autowired
-	BreweryClient client;
+	BreweryCustomerClient client;
 
-	@Test
-	void testGetBeer() {
-		BeerDto dto = client.getBeerById(UUID.randomUUID());
-
-		assertNotNull(dto);
-	}
-	
-	@Test
-	void testSaveBeer() {
-		BeerDto beer = BeerDto.builder().beerName("Beer Creation Test").build();
-		
-		URI uri = client.saveBeer(beer);
-		
-		assertNotNull(uri);
-	}
-	
 	@Test
 	void testGetCustomer() {
 		UUID uuid = UUID.randomUUID();
@@ -56,6 +39,27 @@ class BreweryClientTest {
 		
 		assertNotNull(uri);
 		log.debug("Successfully saved customer at {}", uri);
+	}
+	
+	@Test
+	void testEditCustomer() {
+		UUID uuid = UUID.randomUUID();
+		Customer customer = Customer.builder().id(uuid).name("Customer Edition Test").build();
+		
+		log.debug("Trying to update customer {}",  customer);
+		client.updateCustomer(uuid, customer);
+		
+		log.debug("Successfully updated customer {}", customer);
+	}
+	
+	@Test
+	void testDeleteCustomer() {
+		UUID uuid = UUID.randomUUID();
+		
+		log.debug("Trying to delete customer {}",  uuid);
+		client.deleteCustomer(uuid);
+		
+		log.debug("Successfully deleted customer {}", uuid);
 	}
 
 }
