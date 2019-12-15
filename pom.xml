@@ -47,6 +47,16 @@
 	        <groupId>org.apache.httpcomponents</groupId>
     	    <artifactId>httpasyncclient</artifactId>
       	</dependency>
+      	<!-- Going Reactive with Spring WebFlux -->
+      	<dependency>
+		    <groupId>org.springframework.boot</groupId>
+		    <artifactId>spring-boot-starter-webflux</artifactId>
+		</dependency>
+		<!-- Enable inspector information on Spring Beans using this Actuator -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+	    	<artifactId>spring-boot-actuator</artifactId>
+		</dependency>
     </dependencies>
 
     <build>
